@@ -38,10 +38,21 @@ GEM
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    addressable (2.5.2)
+      public_suffix (>= 2.0.2, < 4.0)
     arel (7.1.4)
     bindex (0.5.0)
     builder (3.2.3)
     byebug (10.0.2)
+    capybara (3.1.1)
+      addressable
+      mini_mime (>= 0.1.3)
+      nokogiri (~> 1.8)
+      rack (>= 1.6.0)
+      rack-test (>= 0.6.3)
+      xpath (~> 3.0)
+    cliver (0.3.2)
+    coderay (1.1.2)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0)
@@ -54,6 +65,11 @@ GEM
     diff-lcs (1.3)
     erubis (2.7.0)
     execjs (2.7.0)
+    factory_bot (4.8.2)
+      activesupport (>= 3.0.0)
+    factory_bot_rails (4.8.2)
+      factory_bot (~> 4.8.2)
+      railties (>= 3.0.0)
     ffi (1.9.23)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
@@ -83,6 +99,15 @@ GEM
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
     pg (1.0.0)
+    phantomjs (2.1.1.0)
+    poltergeist (1.18.1)
+      capybara (>= 2.1, < 4)
+      cliver (~> 0.3.1)
+      websocket-driver (>= 0.2.0)
+    pry (0.11.3)
+      coderay (~> 1.1.0)
+      method_source (~> 0.9.0)
+    public_suffix (3.0.2)
     puma (3.11.4)
     rack (2.0.5)
     rack-test (0.6.3)
@@ -173,17 +198,24 @@ GEM
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.3)
+    xpath (3.1.0)
+      nokogiri (~> 1.8)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   byebug
+  capybara
   coffee-rails (~> 4.2)
+  factory_bot_rails
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)
   pg (>= 0.18, < 2.0)
+  phantomjs
+  poltergeist
+  pry
   puma (~> 3.0)
   rails (~> 5.0.7)
   rails-controller-testing
