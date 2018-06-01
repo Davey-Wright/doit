@@ -7,7 +7,6 @@ RSpec.describe TasksController, type: :controller do
 			task2 = FactoryBot.create(:task)
 			get :index
 			expect(response).to have_http_status(:success)
-			binding.pry
 			response_value = ActiveSupport::JSON.decode(response.body)
 			expect(response_value.count).to eq(2)
 		end
