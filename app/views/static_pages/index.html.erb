@@ -16,10 +16,12 @@ $(()=>{
     let htmlElement = '';
 
     $.each(data, (index, task)=>{
+      let checkedStatus = task.done ? 'checked' : '';
+      let doneClass = task.done ? 'complete' : 'incomplete';
       let taskElement = '<li>' +
         '<div class="view">' +
-          '<input class="toggle" type="checkbox">' +
-            '<label>' +
+          `<input class="toggle" type="checkbox" data-id=${task.id} ${checkedStatus}>` +
+            `<label class=${doneClass}>` +
             task.title +
           '</label>' +
         '</div>' +
@@ -28,6 +30,21 @@ $(()=>{
       htmlElement += taskElement;
     });
     $('.todo-list').html(htmlElement);
+
+    $('.toggle').change((e)=>{
+      let taskId = $(e.target).data('id');
+      let doneValue = Boolean($(e.target).is(':checked'));
+      $.ajax({
+        url: '/tasks/' + taskId,
+        type: 'PUT',
+        data: {
+          task: {
+            done: doneValue
+          }
+        }
+      });
+    });
+
   });
 
 });
