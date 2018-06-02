@@ -6,7 +6,6 @@ RSpec.describe 'tasks/index', type: :feature do
 		task2 = FactoryBot.create(:task)
 		visit tasks_path
 		response_value = ActiveSupport::JSON.decode(page.body)
-		task_title = response_value.first['title']
-		expect(page).to have_content(task_title)
+		expect(response_value.count).to eq(2)
 	end
 end
