@@ -1,59 +1,12 @@
 <section class="todoapp">
   <header class="header">
     <h1>Do It!</h1>
-    <input class="new-todo" placeholder="What needs to be done?" autofocus="">
+    <form id="new-task-form">
+      <input type="text" class="new-task" placeholder='Add a new task HERE'/>
+    </form>
   </header>
   <section class="main">
     <ul class="todo-list">
     </ul>
   </section>
 </section>
-
-<script>
-$(()=>{
-
-  function taskHTML(task){
-    let checkedStatus = task.done ? 'checked' : '';
-    let doneClass = task.done ? 'complete' : 'incomplete';
-    let taskElement = '<li>' +
-      '<div class="view">' +
-        `<input class="toggle" type="checkbox" data-id=${task.id} ${checkedStatus}>` +
-          `<label class=${doneClass}>` +
-          task.title +
-        '</label>' +
-      '</div>' +
-    '</li>';
-
-    return taskElement;
-  };
-
-  function toggleTask(e){
-    let taskId = $(e.target).data('id');
-    let doneValue = Boolean($(e.target).is(':checked'));
-    $.ajax({
-      url: '/tasks/' + taskId,
-      type: 'PUT',
-      data: {
-        task: {
-          done: doneValue
-        }
-      }
-    });
-  }
-
-  $.get('/tasks').success((data)=>{
-
-    let htmlString = '';
-
-    $.each(data, (index, task)=>{
-      htmlString += taskHTML(task);
-    });
-
-    $('.todo-list').html(htmlString);
-
-    $('.toggle').change(toggleTask);
-
-  });
-
-});
-</script>
