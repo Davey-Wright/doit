@@ -1,4 +1,4 @@
-$(()=>{
+$(function{
 
   function taskHTML(task){
     let checkedStatus = task.done ? 'checked' : '';
