@@ -2,7 +2,8 @@ $(()=>{
 
   function taskHTML(task){
     let checkedStatus = task.done ? 'checked' : '';
-    let taskElement = '<li>' +
+    let liClass = task.done ? "completed" : "";
+    let taskElement = `<li id="listItem-${task.id}" class="${ liClass }">` +
       '<div class="view">' +
         `<input class="toggle" type="checkbox" data-id=${task.id} ${checkedStatus}>` +
           `<label>${task.title}</label>` +
@@ -23,24 +24,13 @@ $(()=>{
           done: doneValue
         }
       }
-    });
+    }).success((task)=>{
+      let liElement = taskHTML(task);
+      $(`#listItem-${task.id}`).replaceWith(liElement);
+      $('.toggle').change(toggleTask);
+    })
   }
 
-  $('#new-task-form').submit((e)=>{
-    e.preventDefault();
-    let task_title = $('.new-task').val();
-    let payload = {
-      task: {
-        title: task_title
-      }
-    }
-    $.post('/tasks', payload).success((task)=>{
-      let htmlString = taskHTML(task);
-      $('.todo-list').append(htmlString);
-      $('.new-task').val('');
-      $('.toggle').change(toggleTask);
-    });
-  });
 
   $.get('/tasks').success((data)=>{
 
@@ -55,5 +45,25 @@ $(()=>{
     $('.toggle').change(toggleTask);
 
   });
+
+
+
+  $('#new-form').submit((e)=>{
+    e.preventDefault();
+    let task_title = $('.new-todo').val();
+    let payload = {
+      task: {
+        title: task_title
+      }
+    }
+    $.post('/tasks', payload).success((task)=>{
+      let htmlString = taskHTML(task);
+      console.log(task)
+      $('.todo-list').append(htmlString);
+      $('.new-todo').val('');
+      $('.toggle').change(toggleTask);
+    });
+  });
+
 
 });
